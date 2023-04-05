@@ -1,0 +1,32 @@
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+/>
+<div class="text-center">
+  <div class="panel-default">
+    <div class="panel-header">CoreGPT</div>
+    <div class="panel-body">
+      <div class="col-sm-12 mt-5">
+        <mat-form-field class="example-full-width">
+          <mat-label>Enter your question</mat-label>
+          <input
+            matInput
+            placeholder="Ex. What is the meaning of life?"
+            [(ngModel)]="searchTxtVal"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-sm-12 mt-5">
+        <button mat-raised-button (click)="getResult()">Get Result</button>
+      </div>
+      <div class="col-sm-12 mt-5 output" *ngIf="isLoading">
+        <p style="color: red">Loading...</p>
+      </div>
+      <div class="col-sm-12 mt-5 output" *ngIf="showOutput">
+        {{ output }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
