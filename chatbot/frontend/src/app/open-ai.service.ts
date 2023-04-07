@@ -9,8 +9,9 @@ export class OpenAIService {
   constructor(private http: HttpClient) {}
 
   getData(input: string): Observable<any> {
-    return this.http.get(
-      'https://localhost:7288/api/OpenAI/GetData?input=' + input,
+    const prompt = { "prompt" : input};
+    return this.http.post(
+      'http://localhost:5000/ask/', prompt,
       { responseType: 'text' }
     );
   }

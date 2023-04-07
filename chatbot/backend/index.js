@@ -1,4 +1,6 @@
 require("dotenv").config();
+const cors = require('cors');
+
 const express = require("express");
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -11,6 +13,8 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const port = process.env.PORT || 5000;
+
+app.use(cors());
 
 app.post("/ask", async (req, res) => {
   const prompt = req.body.prompt;
@@ -25,9 +29,9 @@ app.post("/ask", async (req, res) => {
       prompt,
     });
     const completion = response.data.choices[0].text;
+    console.log(completion);
     return res.status(200).json({
-      success: true,
-      message: completion,
+      message: completion
     });
   } catch (error) {
     console.log(error.message);
