@@ -12,7 +12,7 @@ export class OpenAIService {
     const prompt = { "prompt" : input};
     return this.http.post(
       'http://localhost:5000/ask/', prompt,
-      { responseType: 'text' }
+      { responseType: 'json' }
     );
   }
 }

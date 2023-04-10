@@ -4,26 +4,33 @@
 />
 <div class="text-center">
   <div class="panel-default">
-    <div class="panel-header">CoreGPT</div>
+    <div class="panel-header">ChatGPT Clone</div>
     <div class="panel-body">
       <div class="col-sm-12 mt-5">
         <mat-form-field class="example-full-width">
           <mat-label>Enter your question</mat-label>
           <input
-            matInput
             placeholder="Ex. What is the meaning of life?"
-            [(ngModel)]="searchTxtVal"
+            (keydown)="handleKeyDown($event)"
+            [(ngModel)] = "searchTxtVal[count]"
+            class="qus-input"
           />
         </mat-form-field>
-      </div>
-      <div class="col-sm-12 mt-5">
-        <button mat-raised-button (click)="getResult()">Get Result</button>
       </div>
       <div class="col-sm-12 mt-5 output" *ngIf="isLoading">
         <p style="color: red">Loading...</p>
       </div>
-      <div class="col-sm-12 mt-5 output" *ngIf="showOutput">
-        {{ output }}
+      <div *ngFor="let item of output; let i = index">
+        <div :key="i" *ngIf="output[output.length - i -1] != '' ">
+          <div class="col-sm-12 mt-5 qus-field" *ngIf="showOutput">
+            <img src="assets/avatar.png" class="user-img"/>
+            {{searchTxtVal[output.length - i -1]}}
+          </div>
+          <div class="col-sm-12 mt-5 ans-field" *ngIf="showOutput">
+            <img src="assets/chatgpt.jpg" class="user-img"/>
+            {{output[output.length - i - 1]}}
+          </div>
+        </div>
       </div>
     </div>
   </div>
